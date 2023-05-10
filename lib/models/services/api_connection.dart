@@ -134,3 +134,46 @@ Future<dynamic> removeContenidoUser(dynamic tabla, dynamic idSesion, dynamic idC
       throw Exception("Falló la carga");
   }
 }
+Future<dynamic> conectarPartida() async {
+  final response =
+    await http.get(Uri.parse("$apiUrl:$apiPort/partidas"));
+  switch (response.statusCode) {
+    case 200:
+      final parsed = json.decode(response.body);
+      return parsed;
+    default:
+      throw Exception("Falló la carga");
+  }
+}
+Future<dynamic> filtrarPartidaUser(dynamic idSesion) async {
+  final response =
+    await http.post(
+      Uri.parse("$apiUrl:$apiPort/usuarioFiltraPartida"),
+      body: {
+        'idSesion': idSesion.toString(),
+      },
+    );
+  switch (response.statusCode) {
+    case 200:
+      final parsed = json.decode(response.body);
+      return parsed;
+    default:
+      throw Exception("Falló la carga");
+  }
+}
+Future<dynamic> conectarPartidaUserId(String idPartida, String idUsuario) async {
+  final response =
+    await http.post(Uri.parse("$apiUrl:$apiPort/partidasAtributosUser"),
+      body: {
+        'idUsuario': idUsuario.toString(),
+        'idPartida': idPartida.toString(),
+      },
+    );
+  switch (response.statusCode) {
+    case 200:
+      final parsed = json.decode(response.body);
+      return parsed;
+    default:
+      throw Exception("Falló la carga");
+  }
+}

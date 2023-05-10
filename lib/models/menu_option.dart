@@ -3,7 +3,7 @@ import 'package:flutter/material.dart' show IconData, Widget;
 class MenuOption {
 
   final String route;
-  final IconData icon;
+  final Widget icon;
   final String name;
   final Widget screen;
 

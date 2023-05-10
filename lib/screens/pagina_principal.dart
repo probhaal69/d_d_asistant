@@ -14,6 +14,7 @@ class PaginaPrincipal extends StatefulWidget {
 
 class _PaginaPrincipalState extends State<PaginaPrincipal> {
   final menuOptions = AppRoutes.menuOptions;
+  final menuDesplegable = AppRoutes.menuDesplegable;
   int? idSesion;    //! Variable para recoger el id del usuario
 
   @override
@@ -45,10 +46,39 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
             ],
             title: const Text('Main Api D&D'),
           ),
+          drawer: Drawer(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/headerDice.png'),
+                      fit: BoxFit.fitHeight,
+                    ),
+                    // color: Colors.blue,
+                  ),
+                  child: Text('Menu')
+                ),
+                for (var option in menuDesplegable)
+                  ListTile(
+                    // leading: Icon(option.icon,
+                    //     color: AppTheme.darkTheme.primaryColor),
+                    leading: option.icon,
+                    title: Text(option.name),
+                    onTap: () {
+                      Navigator.pop(context); // Close the drawer
+                      Navigator.pushNamed(context, option.route);
+                    },
+                  ),
+              ],
+            ),
+          ),
           body: ListView.separated(
               itemBuilder: (context, i) => ListTile(
-                    leading: Icon(menuOptions[i].icon,
-                        color: AppTheme.darkTheme.primaryColor),
+                    // leading: Icon(menuOptions[i].icon,
+                    //     color: AppTheme.darkTheme.primaryColor),
+                    leading: menuOptions[i].icon,
                     title: Text(menuOptions[i].name),
                     onTap: () {
                       Navigator.pushNamed(context, menuOptions[i].route);
