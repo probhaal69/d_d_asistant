@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:d_d_asistant/theme/app_theme.dart';
 import 'package:d_d_asistant/router/app_routes.dart';
-
 import 'package:d_d_asistant/models/sesion.dart';
 
 
@@ -62,8 +59,6 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                 ),
                 for (var option in menuDesplegable)
                   ListTile(
-                    // leading: Icon(option.icon,
-                    //     color: AppTheme.darkTheme.primaryColor),
                     leading: option.icon,
                     title: Text(option.name),
                     onTap: () {
@@ -76,8 +71,6 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
           ),
           body: ListView.separated(
               itemBuilder: (context, i) => ListTile(
-                    // leading: Icon(menuOptions[i].icon,
-                    //     color: AppTheme.darkTheme.primaryColor),
                     leading: menuOptions[i].icon,
                     title: Text(menuOptions[i].name),
                     onTap: () {

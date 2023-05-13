@@ -1,3 +1,5 @@
+import 'package:d_d_asistant/screens/partidas/partidas.dart';
+import 'package:d_d_asistant/screens/partidas/partidas_id_gestionar.dart';
 import 'package:flutter/material.dart';
 import 'package:d_d_asistant/models/models.dart';
 import 'package:d_d_asistant/models/sesion.dart';
@@ -42,6 +44,12 @@ class _PartidasIdState extends State<PartidasId> {
           ),
         ],
         title: const Text("Partida"),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.home),
+        //   onPressed: () {
+        //     Navigator.pushNamed(context, 'home');
+        //   },
+        // ),
       ),
       body: FutureBuilder(
         future: conectarPartidaUserId('${widget.id}', '${idSesion}'),
@@ -68,78 +76,130 @@ class _PartidasIdState extends State<PartidasId> {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    
+                    if (registro['master'] == 1 && registro['creador'] == 0 && registro['estado'] == 'en partida') ...[
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                        Text('Master de partida'),
+                        ],
+                      ),
+                    ],
+                    if (registro['creador'] == 1) ...[
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Dueño de partida'),
+                        ],
+                      ),
+                    ],
+                    if (registro['master'] == 0 && registro['creador'] == 0 && registro['estado'] == 'en partida') ...[
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('en partida'),
+                        ],
+                      ),
+                    ],
+                    if (registro['estado'] == 'rechazada' || registro['estado'] == 'pendiente') ...[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('estado solicitud: '),
+                          Text('${registro['estado']}'),
+                        ],
+                      ),
+                    ],
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ElevatedButton(
-                          onPressed: () async {
-                            int success = await insertContenidoUser('abilityscores', idSesion!, widget.id);
-                            switch (success) {
-                              case 200:
-                              case 201:
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Contenido añadida a tu lista')),
-                                );
-                                break;
-                              case 409:
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('El contenido ya estaba en la lista anteriormente')),
-                                );
-                                break;
-                              case 500:
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Error al Guardar en lista')),
-                                );
-                                break;
-                              default:
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Error al Guardar en lista')),
-                                );
-                            }
-                          },
-                          child: const Text('Guardar en lista'),
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                          onPressed: () async {
-                            int success = await removeContenidoUser('abilityscores', idSesion!, widget.id);
-                            switch (success) {
-                              case 200:
-                              case 201:
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Contenido removido de tu lista')),
-                                );
-                                break;
-                              case 409:
-                              case 404:
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Este contenido no estaba en tu lista')),
-                                );
-                                break;
-                              case 500:
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Error al    Quitar de lista   ')),
-                                );
-                                break;
-                              default:
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Error al    Quitar de lista   ')),
-                                );
-                            }
-                          },
-                          child: const Text('   Quitar de lista   '),
-                        ),
+                        if (registro['creador'] == 1) ...[
+                          ElevatedButton(
+                            onPressed: () async {
+                              int success = await eliminarPartida(widget.id);
+                              switch (success) {
+                                case 200:
+                                case 201:
+                                Navigator.of(context).pushNamedAndRemoveUntil('/partidas', ModalRoute.withName('/home'));
+                                  break;
+                                default:
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Error al eliminar la partida')),
+                                  );
+                              }
+                            },
+                            child: const Text('Eliminar partida'),
+                          ),
+                        ],
+                        if (registro['estado'] == 'en partida' && registro['creador'] == 0) ...[
+                          ElevatedButton(
+                            onPressed: () async {
+                              int success = await salirDePartida(idSesion!, widget.id);
+                              switch (success) {
+                                case 200:
+                                case 201:
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Bye bye')),
+                                  );
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) => const Partidas(),
+                                    ),
+                                  );
+                                  break;
+                                default:
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Error al salir de la partida')),
+                                  );
+                              }
+                            },
+                            child: const Text('Salir de la partida'),
+                          ),
+                        ],
+                        if (registro['estado'] == null) ...[
+                          ElevatedButton(
+                            onPressed: () async {
+                              int success = await solicitarUnirsePartida(idSesion!, widget.id);
+                              switch (success) {
+                                case 200:
+                                case 201:
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Solicitud enviada')),
+                                  );
+                                  // Navigator.pushReplacementNamed(context, 'partidas_id', arguments: widget.id);
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) => PartidasId(id : widget.id),
+                                    ),
+                                  );
+                                  break;
+                                default:
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Error al solicitar unirte a partida')),
+                                  );
+                              }
+                            },
+                            child: const Text('Solicitar unirse'),
+                          ),
+                        ],
                       ],
                     ),
-                    // ListView.builder(
-                    //   itemCount: listCustomContainer.length,
-                    //   itemBuilder: (BuildContext context, int i) {
-                    //     return listCustomContainer[i];
-                    //   },
-                    //   shrinkWrap: true,
-                    //   physics: const NeverScrollableScrollPhysics(),
-                    // ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (registro['creador'] == 1) ...[
+                          ElevatedButton(
+                            onPressed: () async {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) => PartidasIdGestionar(id: widget.id),
+                                ),
+                              );
+                            },
+                            child: const Text('Gestionar'),
+                          ),
+                        ],
+                      ],
+                    ),
                     Column(
                       children: listCustomContainer.map((container) => container).toList(),
                     ),

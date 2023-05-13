@@ -3,11 +3,14 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:d_d_asistant/models/models.dart';
 import 'package:d_d_asistant/screens/apis_screen_id/_screens.dart';
 import 'package:d_d_asistant/models/sesion.dart';
+import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 
 class ConditionsDiseasesDnD extends StatefulWidget {
-  const ConditionsDiseasesDnD({Key? key}) : super(key: key);
+  dynamic filtroPartida;
+  
+  ConditionsDiseasesDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _ConditionsDiseasesDnDState createState() => _ConditionsDiseasesDnDState();
@@ -41,6 +44,9 @@ class _ConditionsDiseasesDnDState extends State<ConditionsDiseasesDnD> {
           : 'Contenido personal';
       });
     }
+    if (widget.filtroPartida != null) {
+      _mostrarListado = filtrarContenidoPartida('conditionsdiseases', widget.filtroPartida);
+    }
   }
   void _cerrarSesion() async {
     await removeUserId();
@@ -60,7 +66,14 @@ class _ConditionsDiseasesDnDState extends State<ConditionsDiseasesDnD> {
             tooltip: 'Cerrar sesión',
           ),
         ],
-        title: const Text("Condiciones y enfermedades")),
+        title: const Text("Condiciones y enfermedades"),
+        leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            Navigator.pushNamed(context, 'home');
+          },
+        ),
+      ),
       body: Column(
         children: [
           Padding(
@@ -103,9 +116,11 @@ class _ConditionsDiseasesDnDState extends State<ConditionsDiseasesDnD> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            ElevatedButton(
-                              onPressed: () {
-                              setState(() {
+
+                            if (widget.filtroPartida == null) ...[
+                              ElevatedButton(
+                                onPressed: () {
+                                setState(() {
                                 _mostrarContenidoGlobal = !_mostrarContenidoGlobal;
                                 _mostrarListado = _mostrarContenidoGlobal
                                     ? conectarDnDapi('conditionsdiseases')
@@ -115,7 +130,18 @@ class _ConditionsDiseasesDnDState extends State<ConditionsDiseasesDnD> {
                                     : 'Contenido personal';
                               });
                               },
-                              child: Text(_botonFiltrarContenido),
+                                child: Text(_botonFiltrarContenido),
+                              ),
+                            ],
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) => const PartidasJugador(tabla: 'conditionsdiseases'),
+                                  ),
+                                );
+                              },
+                              child: const Text('por partidas'),
                             ),
                             ListView.builder(
                               itemCount: filteredData.length,

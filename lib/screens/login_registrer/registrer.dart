@@ -16,7 +16,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _passwordController = TextEditingController();
   
   Future<dynamic> _register() async {
-    if (!isFormularioCompleto(_usernameController.text, _emailController.text, _passwordController.text)) {
+    if (!isFormularioRegistroCompleto(_usernameController.text, _emailController.text, _passwordController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Faltan datos')),
       );
@@ -65,7 +65,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        appBar: AppBar(title: const Text('Registro')),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text('Registro')
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

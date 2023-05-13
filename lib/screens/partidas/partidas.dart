@@ -1,3 +1,4 @@
+import 'package:d_d_asistant/screens/partidas/partidas_crear.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:d_d_asistant/models/models.dart';
@@ -52,115 +53,143 @@ class _PartidasState extends State<Partidas> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: _cerrarSesion,
-            tooltip: 'Cerrar sesión',
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: _cerrarSesion,
+              tooltip: 'Cerrar sesión',
+            ),
+          ],
+          title: const Text("Partidas"),
+          leading: IconButton(
+            icon: const Icon(Icons.home),
+            onPressed: () {
+              Navigator.pushNamed(context, 'home');
+            },
           ),
-        ],
-        title: const Text("Partidas")),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: TextField(
-              onChanged: (value) {
-                setState(() {
-                  _searchTerm = value;
-                });
-              },
-              decoration: InputDecoration(
-                labelText: contentBusqueda('Search'),
-                hintText: contentBusqueda('Hint'),
-                suffixIcon: contentBusqueda('Icon'),
+        ),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: TextField(
+                onChanged: (value) {
+                  setState(() {
+                    _searchTerm = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  labelText: contentBusqueda('Search'),
+                  hintText: contentBusqueda('Hint'),
+                  suffixIcon: contentBusqueda('Icon'),
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: FutureBuilder(
-              future: _mostrarListado,
-              builder: (
-                _,
-                AsyncSnapshot<dynamic> snapshot,
-              ) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasError) {
-                    return const Center(child: Text('Error'));
-                  } else if (snapshot.hasData) {
-                    List data = snapshot.data!;
-                    List filteredData = data.where((element) {
-                      return element['name']
-                          .toString()
-                          .toLowerCase()
-                          .contains(_searchTerm.toLowerCase());
-                    }).toList();
-
-                    return AnimationLimiter(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                              setState(() {
-                                _mostrarContenidoGlobal = !_mostrarContenidoGlobal;
-                                _mostrarListado = _mostrarContenidoGlobal
-                                    ? conectarPartida()
-                                    : filtrarPartidaUser(idSesion!);
-                                _botonFiltrarContenido = _mostrarContenidoGlobal
-                                    ? 'Todas las partidas'
-                                    : 'Tus partidas';
-                              });
-                              },
-                              child: Text(_botonFiltrarContenido),
-                            ),
-                            ListView.builder(
-                              itemCount: filteredData.length,
-                              itemBuilder: (BuildContext context, int i) {
-                                Map registro = filteredData[i];
-                                return AnimationConfiguration.staggeredList(
-                                    position: i,
-                                    duration: const Duration(milliseconds: 375),
-                                    child: SlideAnimation(
-                                      verticalOffset: 50.0,
-                                      child: FadeInAnimation(
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (BuildContext context) => PartidasId(id: registro['id']),//!CAMBIAR
-                                              ),
-                                            );
-                                          },
-                                          child: MostrarCampo(
-                                            campo: '${registro['name']}',
+            Expanded(
+              child: FutureBuilder(
+                future: _mostrarListado,
+                builder: (
+                  _,
+                  AsyncSnapshot<dynamic> snapshot,
+                ) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      return const Center(child: Text('Error'));
+                    } else if (snapshot.hasData) {
+                      List data = snapshot.data!;
+                      List filteredData = data.where((element) {
+                        return element['name']
+                            .toString()
+                            .toLowerCase()
+                            .contains(_searchTerm.toLowerCase());
+                      }).toList();
+    
+                      return AnimationLimiter(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) => const PartidasCrear()
+                                    ),
+                                  );
+                                },
+                                child: const Text('Crear partida'),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                setState(() {
+                                  _mostrarContenidoGlobal = !_mostrarContenidoGlobal;
+                                  _mostrarListado = _mostrarContenidoGlobal
+                                      ? conectarPartida()
+                                      : filtrarPartidaUser(idSesion!);
+                                  _botonFiltrarContenido = _mostrarContenidoGlobal
+                                      ? 'Todas las partidas'
+                                      : 'Tus partidas';
+                                });
+                                },
+                                child: Text(_botonFiltrarContenido),
+                              ),
+                              ListView.builder(
+                                itemCount: filteredData.length,
+                                itemBuilder: (BuildContext context, int i) {
+                                  Map registro = filteredData[i];
+                                  return AnimationConfiguration.staggeredList(
+                                      position: i,
+                                      duration: const Duration(milliseconds: 375),
+                                      child: SlideAnimation(
+                                        verticalOffset: 50.0,
+                                        child: FadeInAnimation(
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (BuildContext context) => PartidasId(id: registro['id']),
+                                                ),
+                                              );
+                                            },
+                                            child: MostrarCampo(
+                                              campo: '${registro['name']}',
+                                              creador: registro['creador'],
+                                              master: registro['master'],
+                                            ),
                                           ),
-                                        ),
+                                        )
                                       )
-                                    )
-                                );
-                              },
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                            ),
-                          ],
+                                  );
+                                },
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                    } else {
+                      return const Center(child: Text('Empty data'));
+                    }
                   } else {
-                    return const Center(child: Text('Empty data'));
+                    return Text('State: ${snapshot.connectionState}');
                   }
-                } else {
-                  return Text('State: ${snapshot.connectionState}');
-                }
-              },
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

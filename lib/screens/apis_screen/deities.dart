@@ -3,11 +3,14 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:d_d_asistant/models/models.dart';
 import 'package:d_d_asistant/screens/apis_screen_id/_screens.dart';
 import 'package:d_d_asistant/models/sesion.dart';
+import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 
 class DeitiesDnD extends StatefulWidget {
-  const DeitiesDnD({Key? key}) : super(key: key);
+  dynamic filtroPartida;
+  
+  DeitiesDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _DeitiesDnDState createState() => _DeitiesDnDState();
@@ -41,6 +44,9 @@ class _DeitiesDnDState extends State<DeitiesDnD> {
           : 'Contenido personal';
       });
     }
+    if (widget.filtroPartida != null) {
+      _mostrarListado = filtrarContenidoPartida('deities', widget.filtroPartida);
+    }
   }
   void _cerrarSesion() async {
     await removeUserId();
@@ -60,7 +66,14 @@ class _DeitiesDnDState extends State<DeitiesDnD> {
             tooltip: 'Cerrar sesión',
           ),
         ],
-        title: const Text("Deidades")),
+        title: const Text("Deidades"),
+        leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            Navigator.pushNamed(context, 'home');
+          },
+        ),
+      ),
       body: Column(
         children: [
           Padding(
@@ -103,9 +116,11 @@ class _DeitiesDnDState extends State<DeitiesDnD> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            ElevatedButton(
-                              onPressed: () {
-                              setState(() {
+
+                            if (widget.filtroPartida == null) ...[
+                              ElevatedButton(
+                                onPressed: () {
+                                setState(() {
                                 _mostrarContenidoGlobal = !_mostrarContenidoGlobal;
                                 _mostrarListado = _mostrarContenidoGlobal
                                     ? conectarDnDapi('deities')
@@ -115,7 +130,18 @@ class _DeitiesDnDState extends State<DeitiesDnD> {
                                     : 'Contenido personal';
                               });
                               },
-                              child: Text(_botonFiltrarContenido),
+                                child: Text(_botonFiltrarContenido),
+                              ),
+                            ],
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) => const PartidasJugador(tabla: 'deities'),
+                                  ),
+                                );
+                              },
+                              child: const Text('por partidas'),
                             ),
                             ListView.builder(
                               itemCount: filteredData.length,

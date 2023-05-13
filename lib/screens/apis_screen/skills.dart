@@ -3,11 +3,14 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:d_d_asistant/models/models.dart';
 import 'package:d_d_asistant/screens/apis_screen_id/_screens.dart';
 import 'package:d_d_asistant/models/sesion.dart';
+import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 
 class SkillsDnD extends StatefulWidget {
-  const SkillsDnD({Key? key}) : super(key: key);
+  dynamic filtroPartida;
+  
+  SkillsDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _SkillsDnDState createState() => _SkillsDnDState();
@@ -41,6 +44,9 @@ class _SkillsDnDState extends State<SkillsDnD> {
           : 'Contenido personal';
       });
     }
+    if (widget.filtroPartida != null) {
+      _mostrarListado = filtrarContenidoPartida('skills', widget.filtroPartida);
+    }
   }
   void _cerrarSesion() async {
     await removeUserId();
@@ -60,7 +66,14 @@ class _SkillsDnDState extends State<SkillsDnD> {
             tooltip: 'Cerrar sesión',
           ),
         ],
-        title: const Text("Habilidades")),
+        title: const Text("Habilidades"),
+        leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            Navigator.pushNamed(context, 'home');
+          },
+        ),
+      ),
       body: Column(
         children: [
           Padding(
@@ -103,9 +116,11 @@ class _SkillsDnDState extends State<SkillsDnD> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            ElevatedButton(
-                              onPressed: () {
-                              setState(() {
+
+                            if (widget.filtroPartida == null) ...[
+                              ElevatedButton(
+                                onPressed: () {
+                                setState(() {
                                 _mostrarContenidoGlobal = !_mostrarContenidoGlobal;
                                 _mostrarListado = _mostrarContenidoGlobal
                                     ? conectarDnDapi('skills')
@@ -115,7 +130,18 @@ class _SkillsDnDState extends State<SkillsDnD> {
                                     : 'Contenido personal';
                               });
                               },
-                              child: Text(_botonFiltrarContenido),
+                                child: Text(_botonFiltrarContenido),
+                              ),
+                            ],
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) => const PartidasJugador(tabla: 'skills'),
+                                  ),
+                                );
+                              },
+                              child: const Text('por partidas'),
                             ),
                             ListView.builder(
                               itemCount: filteredData.length,

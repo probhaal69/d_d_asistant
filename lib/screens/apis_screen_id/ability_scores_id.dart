@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:d_d_asistant/models/models.dart';
 import 'package:d_d_asistant/models/sesion.dart';
+import 'package:d_d_asistant/screens/partidas/partidas_id_master.dart';
 
 class AbilityScoresId extends StatefulWidget {
   final int id;
@@ -140,14 +141,21 @@ class _AbilityScoresIdState extends State<AbilityScoresId> {
                         ),
                       ],
                     ),
-                    // ListView.builder(
-                    //   itemCount: listCustomContainer.length,
-                    //   itemBuilder: (BuildContext context, int i) {
-                    //     return listCustomContainer[i];
-                    //   },
-                    //   shrinkWrap: true,
-                    //   physics: const NeverScrollableScrollPhysics(),
-                    // ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => PartidasIdMaster(id: widget.id, tabla: 'abilityscores'),
+                              ),
+                            );
+                          },
+                          child: const Text('Gestionar lista partida'),
+                        ),
+                      ],
+                    ),
                     Column(
                       children: listCustomContainer.map((container) => container).toList(),
                     ),

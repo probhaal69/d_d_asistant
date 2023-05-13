@@ -14,7 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   Future<void> _login() async {
-    if (!isFormularioLoginCompleto(_emailController.text, _passwordController.text)) {
+    if (!isFormularioCompleto(_emailController.text, _passwordController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Faltan datos')),
       );
@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final respuesta = await iniciarSession(_emailController.text, _passwordController.text);
     switch (respuesta) {
       case 200:
-        // saveUserId(respuesta['id']);
+        // saveUserId(respuesta['id']);     //! ya se guarda la id de usuario en la funcion iniciarSession()
         Navigator.pushReplacementNamed(context, 'home');
         break;
       case 404:
@@ -48,7 +48,10 @@ class _LoginScreenState extends State<LoginScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        appBar: AppBar(title: const Text('Iniciar sesión')),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text('Iniciar sesión')
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(

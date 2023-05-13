@@ -3,11 +3,14 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:d_d_asistant/models/models.dart';
 import 'package:d_d_asistant/screens/apis_screen_id/_screens.dart';
 import 'package:d_d_asistant/models/sesion.dart';
+import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 
 class TablesDnD extends StatefulWidget {
-  const TablesDnD({Key? key}) : super(key: key);
+  dynamic filtroPartida;
+  
+  TablesDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _TablesDnDState createState() => _TablesDnDState();
@@ -41,6 +44,9 @@ class _TablesDnDState extends State<TablesDnD> {
           : 'Contenido personal';
       });
     }
+    if (widget.filtroPartida != null) {
+      _mostrarListado = filtrarContenidoPartida('tables', widget.filtroPartida);
+    }
   }
   void _cerrarSesion() async {
     await removeUserId();
@@ -60,7 +66,14 @@ class _TablesDnDState extends State<TablesDnD> {
             tooltip: 'Cerrar sesión',
           ),
         ],
-        title: const Text("Tablas")),
+        title: const Text("Tablas"),
+        leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            Navigator.pushNamed(context, 'home');
+          },
+        ),
+      ),
       body: Column(
         children: [
           Padding(
@@ -103,9 +116,11 @@ class _TablesDnDState extends State<TablesDnD> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            ElevatedButton(
-                              onPressed: () {
-                              setState(() {
+
+                            if (widget.filtroPartida == null) ...[
+                              ElevatedButton(
+                                onPressed: () {
+                                setState(() {
                                 _mostrarContenidoGlobal = !_mostrarContenidoGlobal;
                                 _mostrarListado = _mostrarContenidoGlobal
                                     ? conectarDnDapi('tables')
@@ -115,7 +130,18 @@ class _TablesDnDState extends State<TablesDnD> {
                                     : 'Contenido personal';
                               });
                               },
-                              child: Text(_botonFiltrarContenido),
+                                child: Text(_botonFiltrarContenido),
+                              ),
+                            ],
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) => const PartidasJugador(tabla: 'tables'),
+                                  ),
+                                );
+                              },
+                              child: const Text('por partidas'),
                             ),
                             ListView.builder(
                               itemCount: filteredData.length,

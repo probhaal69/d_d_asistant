@@ -3,11 +3,14 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:d_d_asistant/models/models.dart';
 import 'package:d_d_asistant/screens/apis_screen_id/_screens.dart';
 import 'package:d_d_asistant/models/sesion.dart';
+import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 
 class LanguagesDnD extends StatefulWidget {
-  const LanguagesDnD({Key? key}) : super(key: key);
+  dynamic filtroPartida;
+  
+  LanguagesDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _LanguagesDnDState createState() => _LanguagesDnDState();
@@ -41,6 +44,9 @@ class _LanguagesDnDState extends State<LanguagesDnD> {
           : 'Contenido personal';
       });
     }
+    if (widget.filtroPartida != null) {
+      _mostrarListado = filtrarContenidoPartida('languages', widget.filtroPartida);
+    }
   }
   void _cerrarSesion() async {
     await removeUserId();
@@ -60,7 +66,14 @@ class _LanguagesDnDState extends State<LanguagesDnD> {
             tooltip: 'Cerrar sesión',
           ),
         ],
-        title: const Text("Idiomas")),
+        title: const Text("Idiomas"),
+        leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            Navigator.pushNamed(context, 'home');
+          },
+        ),
+      ),
       body: Column(
         children: [
           Padding(
@@ -103,9 +116,11 @@ class _LanguagesDnDState extends State<LanguagesDnD> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            ElevatedButton(
-                              onPressed: () {
-                              setState(() {
+
+                            if (widget.filtroPartida == null) ...[
+                              ElevatedButton(
+                                onPressed: () {
+                                setState(() {
                                 _mostrarContenidoGlobal = !_mostrarContenidoGlobal;
                                 _mostrarListado = _mostrarContenidoGlobal
                                     ? conectarDnDapi('languages')
@@ -115,7 +130,18 @@ class _LanguagesDnDState extends State<LanguagesDnD> {
                                     : 'Contenido personal';
                               });
                               },
-                              child: Text(_botonFiltrarContenido),
+                                child: Text(_botonFiltrarContenido),
+                              ),
+                            ],
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) => const PartidasJugador(tabla: 'languages'),
+                                  ),
+                                );
+                              },
+                              child: const Text('por partidas'),
                             ),
                             ListView.builder(
                               itemCount: filteredData.length,
