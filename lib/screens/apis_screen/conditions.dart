@@ -8,9 +8,9 @@ import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 class ConditionsDiseasesDnD extends StatefulWidget {
-  dynamic filtroPartida;
+  final dynamic filtroPartida;
   
-  ConditionsDiseasesDnD({this.filtroPartida, Key? key}) : super(key: key);
+  const ConditionsDiseasesDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _ConditionsDiseasesDnDState createState() => _ConditionsDiseasesDnDState();

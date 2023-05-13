@@ -7,9 +7,9 @@ import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 class BoonsDnD extends StatefulWidget {
-  dynamic filtroPartida;
+  final dynamic filtroPartida;
   
-  BoonsDnD({this.filtroPartida, Key? key}) : super(key: key);
+  const BoonsDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _BoonsDnDState createState() => _BoonsDnDState();

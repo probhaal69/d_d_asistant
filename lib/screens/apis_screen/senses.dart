@@ -8,9 +8,9 @@ import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 class SensesDnD extends StatefulWidget {
-  dynamic filtroPartida;
+  final dynamic filtroPartida;
   
-  SensesDnD({this.filtroPartida, Key? key}) : super(key: key);
+  const SensesDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _SensesDnDState createState() => _SensesDnDState();

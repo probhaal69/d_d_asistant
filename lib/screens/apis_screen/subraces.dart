@@ -8,9 +8,9 @@ import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 class SubRacesDnD extends StatefulWidget {
-  dynamic filtroPartida;
+  final dynamic filtroPartida;
   
-  SubRacesDnD({this.filtroPartida, Key? key}) : super(key: key);
+  const SubRacesDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _SubRacesDnDState createState() => _SubRacesDnDState();

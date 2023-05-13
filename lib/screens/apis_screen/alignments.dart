@@ -7,9 +7,9 @@ import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 class AlignmentsDnD extends StatefulWidget {
-  dynamic filtroPartida;
+  final dynamic filtroPartida;
   
-  AlignmentsDnD({this.filtroPartida, Key? key}) : super(key: key);
+  const AlignmentsDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _AlignmentsDnDState createState() => _AlignmentsDnDState();

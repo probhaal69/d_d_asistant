@@ -8,9 +8,9 @@ import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 class MonsterfeaturesDnD extends StatefulWidget {
-  dynamic filtroPartida;
+  final dynamic filtroPartida;
   
-  MonsterfeaturesDnD({this.filtroPartida, Key? key}) : super(key: key);
+  const MonsterfeaturesDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _MonsterfeaturesDnDState createState() => _MonsterfeaturesDnDState();

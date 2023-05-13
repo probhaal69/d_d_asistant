@@ -8,9 +8,9 @@ import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 class MagicvariantsDnD extends StatefulWidget {
-  dynamic filtroPartida;
+  final dynamic filtroPartida;
   
-  MagicvariantsDnD({this.filtroPartida, Key? key}) : super(key: key);
+  const MagicvariantsDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _MagicvariantsDnDState createState() => _MagicvariantsDnDState();

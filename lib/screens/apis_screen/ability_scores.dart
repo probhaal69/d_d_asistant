@@ -4,13 +4,12 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:d_d_asistant/models/models.dart';
 import 'package:d_d_asistant/screens/apis_screen_id/_screens.dart';
 import 'package:d_d_asistant/models/sesion.dart';
-import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 class AbilityDnD extends StatefulWidget {
-  dynamic filtroPartida;
+  final dynamic filtroPartida;
 
-  AbilityDnD({this.filtroPartida, Key? key}) : super(key: key);
+  const AbilityDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _AbilityDnDState createState() => _AbilityDnDState();

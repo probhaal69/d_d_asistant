@@ -8,9 +8,9 @@ import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 class CultsDnD extends StatefulWidget {
-  dynamic filtroPartida;
+  final dynamic filtroPartida;
   
-  CultsDnD({this.filtroPartida, Key? key}) : super(key: key);
+  const CultsDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _CultsDnDState createState() => _CultsDnDState();

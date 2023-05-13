@@ -8,9 +8,9 @@ import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 class DeitiesDnD extends StatefulWidget {
-  dynamic filtroPartida;
+  final dynamic filtroPartida;
   
-  DeitiesDnD({this.filtroPartida, Key? key}) : super(key: key);
+  const DeitiesDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _DeitiesDnDState createState() => _DeitiesDnDState();

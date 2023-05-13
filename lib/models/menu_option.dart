@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' show IconData, Widget;
+import 'package:flutter/material.dart' show Widget;
 
 class MenuOption {
 

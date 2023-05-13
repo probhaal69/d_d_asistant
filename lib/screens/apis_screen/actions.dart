@@ -6,9 +6,9 @@ import 'package:d_d_asistant/models/sesion.dart';
 import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 class ActionsDnD extends StatefulWidget {
-  dynamic filtroPartida;
+  final dynamic filtroPartida;
 
-  ActionsDnD({this.filtroPartida, Key? key}) : super(key: key);
+  const ActionsDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _ActionsDnDState createState() => _ActionsDnDState();

@@ -7,9 +7,9 @@ import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 class BackgroundsDnD extends StatefulWidget {
-  dynamic filtroPartida;
+  final dynamic filtroPartida;
   
-  BackgroundsDnD({this.filtroPartida, Key? key}) : super(key: key);
+  const BackgroundsDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _BackgroundsDnDState createState() => _BackgroundsDnDState();

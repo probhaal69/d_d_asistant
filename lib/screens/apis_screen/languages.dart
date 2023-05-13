@@ -8,9 +8,9 @@ import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 class LanguagesDnD extends StatefulWidget {
-  dynamic filtroPartida;
+  final dynamic filtroPartida;
   
-  LanguagesDnD({this.filtroPartida, Key? key}) : super(key: key);
+  const LanguagesDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _LanguagesDnDState createState() => _LanguagesDnDState();

@@ -7,9 +7,9 @@ import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 class BestiaryDnD extends StatefulWidget {
-  dynamic filtroPartida;
+  final dynamic filtroPartida;
   
-  BestiaryDnD({this.filtroPartida, Key? key}) : super(key: key);
+  const BestiaryDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _BestiaryDnDState createState() => _BestiaryDnDState();
