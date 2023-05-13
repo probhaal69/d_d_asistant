@@ -5,14 +5,14 @@ bool isValidEmail(String email) {
   final RegExp emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
   return emailRegex.hasMatch(email);
 }
-bool isFormularioCompleto(String usuario, String email, String password) {
+bool isFormularioRegistroCompleto(String usuario, String email, String password) {
   if (usuario == '' || email == '' || password == '') {
     return false;
   }
   return true;
 }
-bool isFormularioLoginCompleto(String email, String password) {
-  if (email == '' || password == '') {
+bool isFormularioCompleto(String campo1, String campo2) {
+  if (campo1 == '' || campo2 == '') {
     return false;
   }
   return true;

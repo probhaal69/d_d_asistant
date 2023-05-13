@@ -1,3 +1,4 @@
+import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:d_d_asistant/models/models.dart';
@@ -6,7 +7,9 @@ import 'package:d_d_asistant/models/sesion.dart';
 
 
 class AbilityDnD extends StatefulWidget {
-  const AbilityDnD({Key? key}) : super(key: key);
+  final dynamic filtroPartida;
+
+  const AbilityDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _AbilityDnDState createState() => _AbilityDnDState();
@@ -44,11 +47,14 @@ class _AbilityDnDState extends State<AbilityDnD> {
           : 'Contenido personal';
       });
     }
+    if (widget.filtroPartida != null) {
+      _mostrarListado = filtrarContenidoPartida('abilityscores', widget.filtroPartida);
+    }
   }
   void _cerrarSesion() async {
     await removeUserId();
     Navigator.of(context).pushReplacementNamed('/login');
-  }
+  }  
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +67,14 @@ class _AbilityDnDState extends State<AbilityDnD> {
             tooltip: 'Cerrar sesión',
           ),
         ],
-        title: const Text("Caracteristicas")),
+        title: const Text("Caracteristicas"),
+        leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            Navigator.pushNamed(context, 'home');
+          },
+        ),
+      ),
       body: Column(
         children: [
           Padding(
@@ -104,19 +117,32 @@ class _AbilityDnDState extends State<AbilityDnD> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
+                            if (widget.filtroPartida == null) ...[
+                              ElevatedButton(
+                                onPressed: () {
+                                setState(() {
+                                  _mostrarContenidoGlobal = !_mostrarContenidoGlobal;
+                                  _mostrarListado = _mostrarContenidoGlobal
+                                      ? conectarDnDapi('abilityscores')
+                                      : filtrarContenidoUser('abilityscores', idSesion!);
+
+                                  _botonFiltrarContenido = _mostrarContenidoGlobal
+                                      ? 'Contenido global'
+                                      : 'Contenido personal';
+                                });
+                                },
+                                child: Text(_botonFiltrarContenido),
+                              ),
+                            ],
                             ElevatedButton(
                               onPressed: () {
-                              setState(() {
-                                _mostrarContenidoGlobal = !_mostrarContenidoGlobal;
-                                _mostrarListado = _mostrarContenidoGlobal
-                                    ? conectarDnDapi('abilityscores')
-                                    : filtrarContenidoUser('abilityscores', idSesion!);
-                                _botonFiltrarContenido = _mostrarContenidoGlobal
-                                    ? 'Contenido global'
-                                    : 'Contenido personal';
-                              });
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) => const PartidasJugador(tabla: 'abilityscores'),
+                                  ),
+                                );
                               },
-                              child: Text(_botonFiltrarContenido),
+                              child: const Text('por partidas'),
                             ),
                             ListView.builder(
                               itemCount: filteredData.length,

@@ -44,7 +44,14 @@ class _LootDnDState extends State<LootDnD> {
             tooltip: 'Cerrar sesión',
           ),
         ],
-        title: const Text("Recompensas")),
+        title: const Text("Recompensas"),
+        leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            Navigator.pushNamed(context, 'home');
+          },
+        ),
+      ),
       body: Column(
         children: [
           Padding(

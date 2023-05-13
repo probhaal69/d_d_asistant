@@ -2,149 +2,158 @@ import 'package:flutter/material.dart';
 import 'package:d_d_asistant/screens/login_registrer/auth.dart';
 import 'package:d_d_asistant/models/models.dart';
 import 'package:d_d_asistant/screens/apis_screen/_screens.dart';
+import 'package:d_d_asistant/screens/partidas/_screens.dart';
 
 
 class AppRoutes {
 
   static const initialRoute = '/login';
 
+  static final menuDesplegable = <MenuOption>[
+    MenuOption(
+        route: 'partidas',
+        name: 'Partidas',
+        screen: const Partidas(),
+        icon: Image.asset('assets/abilityScores.png')),
+  ];
+
   static final menuOptions = <MenuOption>[
 
     MenuOption(
         route: 'ability_scores',
         name: 'Caracteristicas',
-        screen: const AbilityDnD(),
-        icon: Icons.list_alt),
+        screen: AbilityDnD(),
+        icon: Image.asset('assets/abilityScores.png')),
     MenuOption(
         route: 'acciones',
         name: 'Acciones',
-        screen: const ActionsDnD(),
-        icon: Icons.list),
+        screen: ActionsDnD(),
+        icon: Image.asset('assets/Acciones.png')),
     MenuOption(
         route: 'alignments',
         name: 'Alineamientos',
-        screen: const AlignmentsDnD(),
-        icon: Icons.list),
+        screen: AlignmentsDnD(),
+        icon: Image.asset('assets/Alineamiento.png')),
     MenuOption(
         route: 'backgrounds',
         name: 'Trasfondos',
-        screen: const BackgroundsDnD(),
-        icon: Icons.add_alert_outlined),
+        screen: BackgroundsDnD(),
+        icon: Image.asset('assets/Trasfondo.png')),
     MenuOption(
         route: 'Bestiary',
         name: 'Bestiario',
-        screen: const BestiaryDnD(),
-        icon: Icons.add_alert_outlined),
+        screen: BestiaryDnD(),
+        icon: Image.asset('assets/bestiario.png')),
     MenuOption(
         route: 'Boons',
         name: 'Bendiciones',
-        screen: const BoonsDnD(),
-        icon: Icons.add_alert_outlined),
+        screen: BoonsDnD(),
+        icon: Image.asset('assets/bendiciones.png')),
     MenuOption(
         route: 'clases',
         name: 'Clases',
-        screen: const ClasesDnD(),
-        icon: Icons.credit_card),
+        screen: ClasesDnD(),
+        icon: Image.asset('assets/Clases.png')),
     MenuOption(
         route: 'Conditions',
         name: 'Condiciones y enfermedades',
-        screen: const ConditionsDiseasesDnD(),
-        icon: Icons.credit_card),
+        screen: ConditionsDiseasesDnD(),
+        icon: Image.asset('assets/Condiciones y enfermedades.png')),
     MenuOption(
         route: 'Cults',
         name: 'Cultos',
-        screen: const CultsDnD(),
-        icon: Icons.credit_card),
+        screen: CultsDnD(),
+        icon: Image.asset('assets/Cultos.png')),
     MenuOption(
         route: 'Deities',
         name: 'Deidades',
-        screen: const DeitiesDnD(),
-        icon: Icons.credit_card),
+        screen: DeitiesDnD(),
+        icon: Image.asset('assets/Deidades.png')),
     MenuOption(
         route: 'Encounters',
         name: 'Encuentros',
-        screen: const EncountersDnD(),
-        icon: Icons.credit_card),
+        screen: EncountersDnD(),
+        icon: Image.asset('assets/Encuentros.png')),
     MenuOption(
         route: 'feats',
         name: 'Dotes',
-        screen: const FeatsDnD(),
-        icon: Icons.details),
+        screen: FeatsDnD(),
+        icon: Image.asset('assets/Dotes.png')),
     MenuOption(
         route: 'items_base',
         name: 'Items_base',
-        screen: const ItemBaseDnD(),
-        icon: Icons.details),
+        screen: ItemBaseDnD(),
+        icon: Image.asset('assets/Variantes mágicas.png')),
     MenuOption(
         route: 'items',
         name: 'Items',
-        screen: const ItemsDnD(),
-        icon: Icons.details),
+        screen: ItemsDnD(),
+        icon: Image.asset('assets/Variantes mágicas.png')),
     MenuOption(
         route: 'languages',
         name: 'Idiomas',
-        screen: const LanguagesDnD(),
-        icon: Icons.build_circle_outlined),
+        screen: LanguagesDnD(),
+        icon: Image.asset('assets/Idiomas.png')),
     MenuOption(
         route: 'loot',
         name: 'Recompensas',
         screen: const LootDnD(),
-        icon: Icons.build_circle_outlined),
+        icon: Image.asset('assets/Recompensas.png')),
     MenuOption(
         route: 'magicvariants',
         name: 'Variantes magicas',
-        screen: const MagicvariantsDnD(),
-        icon: Icons.build_circle_outlined),
+        screen: MagicvariantsDnD(),
+        icon: Image.asset('assets/Variantes mágicas.png')),
     MenuOption(
         route: 'monsterfeatures',
         name: 'Caraceristicas de monstruos',
-        screen: const MonsterfeaturesDnD(),
-        icon: Icons.build_circle_outlined),
+        screen: MonsterfeaturesDnD(),
+        icon: Image.asset('assets/Características (2).png')),
     MenuOption(
         route: 'names',
         name: 'Nombres',
-        screen: const NamesDnD(),
-        icon: Icons.build_circle_outlined),
+        screen: NamesDnD(),
+        icon: Image.asset('assets/nombres.png')),
     MenuOption(
         route: 'objects',
         name: 'Objetos',
-        screen: const ObjectsDnD(),
-        icon: Icons.build_circle_outlined),
+        screen: ObjectsDnD(),
+        icon: Image.asset('assets/Variantes mágicas.png')),
     MenuOption(
         route: 'races',
         name: 'Razas',
-        screen: const RacesDnD(),
-        icon: Icons.build_circle_outlined),
+        screen: RacesDnD(),
+        icon: Image.asset('assets/raza.png')),
     MenuOption(
         route: 'senses',
         name: 'Sentidos',
-        screen: const SensesDnD(),
-        icon: Icons.build_circle_outlined),
+        screen: SensesDnD(),
+        icon: Image.asset('assets/Sentidos.png')),
     MenuOption(
         route: 'skills',
         name: 'Habilidades',
-        screen: const SkillsDnD(),
-        icon: Icons.build_circle_outlined),
+        screen: SkillsDnD(),
+        icon: Image.asset('assets/Habilidades.png')),
     MenuOption(
         route: 'spells',
         name: 'Hechizos',
-        screen: const SpellsDnD(),
-        icon: Icons.build_circle_outlined),
+        screen: SpellsDnD(),
+        icon: Image.asset('assets/Hechizos.png')),
     MenuOption(
         route: 'subclasses',
         name: 'Subclasses',
-        screen: const SubClassesDnD(),
-        icon: Icons.build_circle_outlined),
+        screen: SubClassesDnD(),
+        icon: Image.asset('assets/Subrrazas.png')),
     MenuOption(
         route: 'subraces',
         name: 'Subrazas',
-        screen: const SubRacesDnD(),
-        icon: Icons.build_circle_outlined),
+        screen: SubRacesDnD(),
+        icon: Image.asset('assets/Subrrazas.png')),
     MenuOption(
         route: 'tables',
         name: 'Tablas',
-        screen: const TablesDnD(),
-        icon: Icons.build_circle_outlined),
+        screen: TablesDnD(),
+        icon: Image.asset('assets/Tablas.png')),
   ];
 
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {
@@ -154,9 +163,13 @@ class AppRoutes {
           'home': (BuildContext context) => const PaginaPrincipal(),
           '/register':(BuildContext context) => const RegisterScreen(),
           '/login':(BuildContext context) => LoginScreen(),
+          '/partidas':(BuildContext context) => const Partidas(),
           });
 
     for (final option in menuOptions) {
+      appRoutes.addAll({option.route: (BuildContext context) => option.screen});
+    }
+    for (final option in menuDesplegable) {
       appRoutes.addAll({option.route: (BuildContext context) => option.screen});
     }
 

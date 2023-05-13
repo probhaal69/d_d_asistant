@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:d_d_asistant/models/models.dart';
 import 'package:d_d_asistant/models/sesion.dart';
+import 'package:d_d_asistant/screens/partidas/partidas_id_master.dart';
 
 
 
@@ -136,13 +137,23 @@ class _TablesIdState extends State<TablesId> {
                         ),
                       ],
                     ),
-                    ListView.builder(
-                      itemCount: listCustomContainer.length,
-                      itemBuilder: (BuildContext context, int i) {
-                        return listCustomContainer[i];
-                      },
-                      shrinkWrap: true, // Esto es importante para usar ListView dentro de Column
-                      physics: const NeverScrollableScrollPhysics(), // Esto es importante para evitar conflictos de desplazamiento
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => PartidasIdMaster(id: widget.id, tabla: 'tables'),
+                              ),
+                            );
+                          },
+                          child: const Text('Gestionar lista partida'),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: listCustomContainer.map((container) => container).toList(),
                     ),
                   ],
                 ),

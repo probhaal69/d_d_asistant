@@ -3,10 +3,13 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:d_d_asistant/models/models.dart';
 import 'package:d_d_asistant/screens/apis_screen_id/_screens.dart';
 import 'package:d_d_asistant/models/sesion.dart';
+import 'package:d_d_asistant/screens/partidas/partidas_jugador.dart';
 
 
 class AlignmentsDnD extends StatefulWidget {
-  const AlignmentsDnD({Key? key}) : super(key: key);
+  final dynamic filtroPartida;
+  
+  const AlignmentsDnD({this.filtroPartida, Key? key}) : super(key: key);
 
   @override
   _AlignmentsDnDState createState() => _AlignmentsDnDState();
@@ -41,6 +44,9 @@ class _AlignmentsDnDState extends State<AlignmentsDnD> {
           : 'Contenido personal';
       });
     }
+    if (widget.filtroPartida != null) {
+      _mostrarListado = filtrarContenidoPartida('alignments', widget.filtroPartida);
+    }
   }
   void _cerrarSesion() async {
     await removeUserId();
@@ -58,7 +64,14 @@ class _AlignmentsDnDState extends State<AlignmentsDnD> {
             tooltip: 'Cerrar sesión',
           ),
         ],
-        title: const Text("Alineamientos")),
+        title: const Text("Alineamientos"),
+        leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            Navigator.pushNamed(context, 'home');
+          },
+        ),
+      ),
       body: Column(
         children: [
           Padding(
@@ -101,9 +114,11 @@ class _AlignmentsDnDState extends State<AlignmentsDnD> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            ElevatedButton(
-                              onPressed: () {
-                              setState(() {
+
+                            if (widget.filtroPartida == null) ...[
+                              ElevatedButton(
+                                onPressed: () {
+                                setState(() {
                                 _mostrarContenidoGlobal = !_mostrarContenidoGlobal;
                                 _mostrarListado = _mostrarContenidoGlobal
                                     ? conectarDnDapi('alignments')
@@ -113,7 +128,18 @@ class _AlignmentsDnDState extends State<AlignmentsDnD> {
                                     : 'Contenido personal';
                               });
                               },
-                              child: Text(_botonFiltrarContenido),
+                                child: Text(_botonFiltrarContenido),
+                              ),
+                            ],
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) => const PartidasJugador(tabla: 'alignments'),
+                                  ),
+                                );
+                              },
+                              child: const Text('por partidas'),
                             ),
                             ListView.builder(
                               itemCount: filteredData.length,

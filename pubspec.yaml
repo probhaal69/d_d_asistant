@@ -50,6 +50,30 @@ dev_dependencies:
 flutter:
   assets:
     - .env
+    - assets/headerDice.png
+    - assets/abilityScores.png
+    - assets/Acciones.png
+    - assets/Alineamiento.png
+    - assets/bendiciones.png
+    - assets/bestiario.png
+    - assets/Características (2).png
+    - assets/Clases.png
+    - assets/Condiciones y enfermedades.png
+    - assets/Cultos.png
+    - assets/Deidades.png
+    - assets/Dotes.png
+    - assets/Encuentros.png
+    - assets/Habilidades.png
+    - assets/Hechizos.png
+    - assets/Idiomas.png
+    - assets/nombres.png
+    - assets/raza.png
+    - assets/Recompensas.png
+    - assets/Sentidos.png
+    - assets/Subrrazas.png
+    - assets/Tablas.png
+    - assets/Trasfondo.png
+    - assets/Variantes mágicas.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
