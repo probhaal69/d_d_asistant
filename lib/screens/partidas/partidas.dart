@@ -55,7 +55,7 @@ class _PartidasState extends State<Partidas> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil('home', (route) => false);
         return false;
       },
       child: Scaffold(
