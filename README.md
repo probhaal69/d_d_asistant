@@ -25,6 +25,9 @@ Para usar este proyecto:
 6. Ejecuta `flutter pub get` para instalar las dependencias.
 7. Ejecuta `flutter run` para iniciar la aplicación.
 
+## App
+Puedes descargar y usar ya la aplicacion android [aqui](https://mega.nz/file/MElilTYT#HC6Hh1gmYHPB9akCQqwXOzdZv-JCBMF2Be88Y_-hSyw).
+
 ## Contribuir
 
 Si te interesa contribuir a este proyecto, te invito a hacer un fork y enviar tus cambios. Asegúrate de seguir las mejores prácticas de Flutter y de documentar bien tus cambios.
