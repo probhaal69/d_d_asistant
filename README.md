@@ -12,7 +12,7 @@ La base de datos es esencial para el funcionamiento de este proyecto. Encontrar�
 
 ### Respaldo de la Base de Datos
 
-Para facilitar la configuración, he incluido un archivo de respaldo mysql de la base de datos. Puedes descargarlo desde [aquí](https://mega.nz/file/hYEgTACB#sPvTKGj5NJA9UqB_WoZYKzPXXtl1n3eYB4ZQpP1rFfk).
+Para facilitar la configuración, he incluido un archivo de respaldo mysql de la base de datos. Puedes descargarlo desde [aquí](https://mega.nz/file/UM9C1RCJ#N2_hqxLy7NsMiXIG9jnRK2ppAAPkqV-eyHKumvI0YtE).
 
 ## Cómo usar este Proyecto
 
