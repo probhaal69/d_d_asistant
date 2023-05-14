@@ -1,3 +1,4 @@
+#guardar archivo como .env y editar valores
 
 RUTA_API=remotehost
 PORT_API=3000
