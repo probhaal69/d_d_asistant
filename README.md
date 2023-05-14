@@ -21,7 +21,7 @@ Para usar este proyecto:
 1. Clona el repositorio.
 3. Asegúrate de tener Flutter instalado y configurado en tu máquina.
 4. Asegúrate de tener un servidor configurado, puedes hacer uso del archivo de respaldo mysql y del repositorio del servidor de apis.
-5. Asegurate de que tienes un archivo ".env" en la raiz de tu proyecto con la direccion y puerto de tu servidor.
+5. Asegurate de que tienes un archivo `.env` en la raiz de tu proyecto con la direccion y puerto de tu servidor.
 6. Ejecuta `flutter pub get` para instalar las dependencias.
 7. Ejecuta `flutter run` para iniciar la aplicación.
 
