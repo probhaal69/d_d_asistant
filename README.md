@@ -1,16 +1,30 @@
 # d_d_asistant
 
-A new Flutter project.
+Este es un proyecto de Flutter que sirve de sistente para gestionar la informacion consultada en el juego de mesa Dungeons and Dragons. Para una explicación detallada de cómo funciona, puedes revisar [este video](https://youtu.be/6qgK6Z1OFk0).
 
-## Getting Started
+## Servidor y APIs
 
-This project is a starting point for a Flutter application.
+El servidor y las APIs que alimentan esta aplicación están disponibles en [este repositorio](https://github.com/probhaal69/apiRest).
 
-A few resources to get you started if this is your first Flutter project:
+## Esquema de Base de Datos
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+La base de datos es esencial para el funcionamiento de este proyecto. Encontrarás el esquema relacional en [este enlace](https://mega.nz/file/RZVwnAoa#SQUrlec3l9qacWF80_Ag8oJOYoIAmSPeGLbIBKifO8w), podran verlo facilmente con el propio mysql workbench.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Respaldo de la Base de Datos
+
+Para facilitar la configuración, he incluido un archivo de respaldo mysql de la base de datos. Puedes descargarlo desde [aquí](https://mega.nz/file/hYEgTACB#sPvTKGj5NJA9UqB_WoZYKzPXXtl1n3eYB4ZQpP1rFfk).
+
+## Cómo usar este Proyecto
+
+Para usar este proyecto:
+
+1. Clona el repositorio.
+3. Asegúrate de tener Flutter instalado y configurado en tu máquina.
+4. Asegúrate de tener un servidor configurado, puedes hacer uso del archivo de respaldo mysql y del repositorio del servidor de apis.
+5. Asegurate de que tienes un archivo ".env" en la raiz de tu proyecto con la direccion y puerto de tu servidor.
+6. Ejecuta `flutter pub get` para instalar las dependencias.
+7. Ejecuta `flutter run` para iniciar la aplicación.
+
+## Contribuir
+
+Si te interesa contribuir a este proyecto, te invito a hacer un fork y enviar tus cambios. Asegúrate de seguir las mejores prácticas de Flutter y de documentar bien tus cambios.
