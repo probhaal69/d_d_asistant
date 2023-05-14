@@ -6,7 +6,7 @@ Este es un proyecto de Flutter que sirve de sistente para gestionar la informaci
 
 El servidor y las APIs que alimentan esta aplicación están disponibles en [este repositorio](https://github.com/probhaal69/apiRest).
 
-## Esquema de Base de Datos
+## Base de Datos
 
 La base de datos es esencial para el funcionamiento de este proyecto. Encontrarás el esquema relacional en [este enlace](https://mega.nz/file/RZVwnAoa#SQUrlec3l9qacWF80_Ag8oJOYoIAmSPeGLbIBKifO8w), podran verlo facilmente con el propio mysql workbench.
 
